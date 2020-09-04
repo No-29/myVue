@@ -17,6 +17,11 @@ export default new Router({
       component: () => import('@/views/login/index')
     },
     {
+      path: '/test01',
+      name: 'Test01',
+      component: () => import('@/views/test01')
+    },
+    {
       path: '/',
       redirect: '/login',
       name: 'HelloWorld',

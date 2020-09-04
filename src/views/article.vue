@@ -78,7 +78,9 @@
               米：<input v-model="miters"/>
               <p id="info">{{time | dateformat}}</p>
               <p ><span>庭院深深深几许</span></p>
-
+              <card></card>
+              <card></card>
+              <card></card>
               <div v-for="(item,i) in numberList" :key="i" >
                 <el-input-number v-model="numberList[i].value" placeholder="" :min="1" :max="1"></el-input-number>
               </div>
@@ -101,9 +103,22 @@
               <p><el-button type="primary">ddd</el-button></p>
               <el-radio label="dd" v-model="radio"></el-radio>
           </div>
-          <div class="remark">
+          <div class="out-article">
+            <div class="header"><h3 class="header-h3"><span>推荐阅读</span></h3></div>
+            <ul class="out-content">
+              <li class="out-content-li"></li>
+            </ul>
+          </div>
+          <div class="remark" style="height:600px;">
             <el-collapse>
               <el-collapse-item name="1" title="一致性">
+                <div>事务处理一致性、原子性</div>
+                <div>事务处理一致性、原子性</div>
+                <div>事务处理一致性、原子性</div>
+                <div>事务处理一致性、原子性</div>
+                <div>事务处理一致性、原子性</div>
+                <div>事务处理一致性、原子性</div>
+                <div>事务处理一致性、原子性</div>
                 <div>事务处理一致性、原子性</div>
               </el-collapse-item>
             </el-collapse>
@@ -124,9 +139,11 @@
 <script>
 import 'video.js/dist/video-js.css'
 import { videoPlayer } from 'vue-video-player'
+import Card from './test01.vue'
 export default {
   components: {
-    videoPlayer
+    videoPlayer,
+    Card
   },
   data () {
     return {
@@ -180,7 +197,7 @@ export default {
         aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [{
-          type: "video/mp4", // 类型
+          type: 'video/mp4', // 类型
           src: '../../static/videos/movie.mp4' // url地址
         }],
         poster: '', // 封面地址
@@ -221,48 +238,48 @@ export default {
       $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft - eventDelta / 4
     },
     // 播放回调
-    onPlayerPlay(player) {
+    onPlayerPlay (player) {
       console.log('player play!', player)
     },
     // 暂停回调
-    onPlayerPause(player) {
+    onPlayerPause (player) {
       console.log('player pause!', player)
     },
     // 视频播完回调
-    onPlayerEnded($event) {
+    onPlayerEnded (player) {
       console.log(player)
     },
     // DOM元素上的readyState更改导致播放停止
-    onPlayerWaiting($event) {
+    onPlayerWaiting (player) {
       console.log(player)
     },
     // 已开始播放回调
-    onPlayerPlaying($event) {
+    onPlayerPlaying (player) {
       console.log(player)
     },
     // 当播放器在当前播放位置下载数据时触发
-    onPlayerLoadeddata($event) {
+    onPlayerLoadeddata (player) {
       console.log(player)
     },
     // 当前播放位置发生变化时触发。
-    onPlayerTimeupdate($event) {
+    onPlayerTimeupdate (player) {
       console.log(player)
     },
-    //媒体的readyState为HAVE_FUTURE_DATA或更高
-    onPlayerCanplay(player) {
+    // 媒体的readyState为HAVE_FUTURE_DATA或更高
+    onPlayerCanplay (player) {
       // console.log('player Canplay!', player)
     },
-    //媒体的readyState为HAVE_ENOUGH_DATA或更高。这意味着可以在不缓冲的情况下播放整个媒体文件。
-    onPlayerCanplaythrough(player) {
+    // 媒体的readyState为HAVE_ENOUGH_DATA或更高。这意味着可以在不缓冲的情况下播放整个媒体文件。
+    onPlayerCanplaythrough (player) {
       // console.log('player Canplaythrough!', player)
     },
-    //播放状态改变回调
-    playerStateChanged(playerCurrentState) {
+    // 播放状态改变回调
+    playerStateChanged (playerCurrentState) {
       console.log('player current update state', playerCurrentState)
     },
-    //将侦听器绑定到组件的就绪状态。与事件监听器的不同之处在于，如果ready事件已经发生，它将立即触发该函数。。
-    playerReadied(player) {
-      console.log('example player 1 readied', player);
+    // 将侦听器绑定到组件的就绪状态。与事件监听器的不同之处在于，如果ready事件已经发生，它将立即触发该函数。。
+    playerReadied (player) {
+      console.log('example player 1 readied', player)
     }
   },
   filters: {
@@ -291,7 +308,22 @@ export default {
 
 </script>
 <style >
-.card{
+.out-article{
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.out-content{
+  margin-bottom: 24px;
+}
+.out-content-li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+.card1{
   height: 100%;
   overflow-y:auto;
 }
@@ -310,6 +342,8 @@ export default {
   padding: 0;
 }
 .card{
+  position: fixed;
+  top: 66px;
   width: 220px;
   /* height: 380px; */
   border-radius: 4px;
@@ -317,6 +351,8 @@ export default {
   margin-bottom: 10px;
   margin-top: 10px;
   padding: 16px;
+  z-index: 1;
+  right: 0;
 }
 .header{
   border-left:4px solid chocolate;
